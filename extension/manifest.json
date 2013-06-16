@@ -1,0 +1,15 @@
+{
+   "background_page": "background.html",
+   "browser_action": {
+      "default_icon": "star_icons_32.ico",
+      "default_title": "Bookmark All"
+   },
+   "description": "Extends chrome's bookmark all tabs feature across all open windows.",
+   "icons": {
+      "128": "star_icons_128.ico",
+      "32": "star_icons_32.ico"
+   },
+   "name": "Bookmark All",
+   "permissions": [ "bookmarks", "tabs" ],
+   "version": "2"
+}
