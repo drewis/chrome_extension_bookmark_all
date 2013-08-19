@@ -1,33 +1,17 @@
-chrome.browserAction.onClicked.addListener(function(tab) {
+$(document).ready(function(){
   var currentTime = new Date();
-  var currentdate = currentTime.getFullYear() + "/" + (currentTime.getMonth() + 1) + "/" + currentTime.getDate();
-  var tabs = [];
-  var t = "Other Bookmarks"
-  chrome.bookmarks.getChildren('0',
-    function(marks){
-      marks.forEach(function(mark){
-        if ((mark.title).toLowerCase() == t.toLowerCase()){
-          chrome.bookmarks.create({
-            parentId:mark.id,
-            title:currentdate},
-          function(mar){
-          // Loop over all windows and their tabs
-          chrome.windows.getAll({ populate: true }, function(windowList) {
-            for (var i = 0; i < windowList.length; i++) {
-              for (var j = 0; j < windowList[i].tabs.length; j++) {
-                var tab = windowList[i].tabs[j];
-                //bookmark the tab
-                chrome.bookmarks.create({
-                  parentId : mar.id,
-                  title : tab.title,
-                  url : tab.url
-                });
-              }
-            }
-          });
-
-          });
-        }
-      });
-    });
+  var folderTitle = currentTime.getFullYear() + "-" + (currentTime.getMonth() + 1) + "-" + currentTime.getDate();
+  // Set default value to current date
+  $('#folderName').val(folderTitle);
+  console.log("Set placeholder to " + folderTitle);
+  // Handle button click
+  $('form').submit(function(){
+    // This seems the stupidest way to get the value
+    var folderName = $('#folderName').val();
+    window.close();
+    // Create bookmarks from background page
+    // I couldn't get it to work from here
+    // and there seemed to be a race condition with window.close()
+    chrome.extension.getBackgroundPage().bookmarkAll(folderName);
+  });
 });
