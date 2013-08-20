@@ -1,6 +1,13 @@
+function toShortISODateString(d) {
+  function pad(n) {
+    return n<10 ? '0'+n : n
+  }
+  return d.getFullYear()+'-'
+    + pad(d.getMonth()+1)+'-'
+    + pad(d.getDate());
+}
 $(document).ready(function(){
-  var currentTime = new Date();
-  var folderTitle = currentTime.getFullYear() + "-" + (currentTime.getMonth() + 1) + "-" + currentTime.getDate();
+  var folderTitle = toShortISODateString(new Date());
   // Set default value to current date
   $('#folderName').val(folderTitle);
   console.log("Set placeholder to " + folderTitle);
@@ -13,5 +20,6 @@ $(document).ready(function(){
     // I couldn't get it to work from here
     // and there seemed to be a race condition with window.close()
     chrome.extension.getBackgroundPage().bookmarkAll(folderName);
+    return false;
   });
 });

@@ -21,7 +21,6 @@
     "default_title": "Bookmark All"
   },
   "background": {
-    "persistent":false,
     "scripts": [
       "background.js"
     ]

@@ -1,5 +1,6 @@
 function bookmarkAll(folderTitle) {
   console.log("Creating new bookmarks in " + folderTitle);
+  // Create folder
   chrome.bookmarks.create(
       {
         title: folderTitle,
@@ -19,7 +20,7 @@ function bookmarkAll(folderTitle) {
           for (var i = 0; i < windowList.length; i++) {
             for (var j = 0; j < windowList[i].tabs.length; j++) {
               var tab = windowList[i].tabs[j];
-              //bookmark the tab
+              // Bookmark the tab
               chrome.bookmarks.create(
                   {
                     parentId : folder.id,
