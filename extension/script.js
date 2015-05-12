@@ -11,6 +11,8 @@ $(document).ready(function(){
   // Set default value to current date
   $('#folderName').val(folderTitle);
   console.log("Set placeholder to " + folderTitle);
+  // Remember last option for checkbox
+  $('#windowsAsFolders').prop('checked', localStorage['windowsAsFolders'] == 'true');
   // Handle button click
   $('form').submit(function(){
     // This seems the stupidest way to get the value
@@ -21,6 +23,8 @@ $(document).ready(function(){
     // I couldn't get it to work from here
     // and there seemed to be a race condition with window.close()
     chrome.extension.getBackgroundPage().bookmarkAll(folderName, windowsAsFolders);
+    // Save option for checkbox
+    localStorage['windowsAsFolders'] = $('#windowsAsFolders').prop('checked') ? 'true' : 'false';
     return false;
   });
 });
