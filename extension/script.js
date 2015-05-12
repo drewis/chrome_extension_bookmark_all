@@ -15,11 +15,12 @@ $(document).ready(function(){
   $('form').submit(function(){
     // This seems the stupidest way to get the value
     var folderName = $('#folderName').val();
+    var windowsAsFolders = $('#windowsAsFolders').is(':checked');
     window.close();
     // Create bookmarks from background page
     // I couldn't get it to work from here
     // and there seemed to be a race condition with window.close()
-    chrome.extension.getBackgroundPage().bookmarkAll(folderName);
+    chrome.extension.getBackgroundPage().bookmarkAll(folderName, windowsAsFolders);
     return false;
   });
 });
