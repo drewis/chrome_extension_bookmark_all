@@ -18,20 +18,27 @@ function bookmarkAll(folderTitle) {
           },
         function(windowList) {
           for (var i = 0; i < windowList.length; i++) {
-            for (var j = 0; j < windowList[i].tabs.length; j++) {
-              var tab = windowList[i].tabs[j];
-              // Bookmark the tab
-              chrome.bookmarks.create(
-                  {
-                    parentId : folder.id,
-                    title : tab.title,
-                    url : tab.url
-                  }
-              );
-            }
+            bookmarkWindowTabs(windowList[i], folder);
           }
         }
       );
     }
+  );
+}
+
+function bookmarkWindowTabs(window, folder) {
+  for (var j = 0; j < window.tabs.length; j++) {
+    var tab = window.tabs[j];
+    bookmarkTab(folder, tab);
+  }
+}
+
+function bookmarkTab(folder, tab) {
+  chrome.bookmarks.create(
+      {
+        parentId : folder.id,
+        title : tab.title,
+        url : tab.url
+      }
   );
 }
