@@ -1,10 +1,11 @@
 function toShortISODateString(d) {
-  function pad(n) {
-    return n<10 ? '0'+n : n
-  }
-  return d.getFullYear()+'-'
-    + pad(d.getMonth()+1)+'-'
-    + pad(d.getDate());
+  var pad = chrome.extension.getBackgroundPage().pad;
+  return d.getFullYear() + '-'
+    + pad(d.getMonth()+1) + '-'
+    + pad(d.getDate()) + ' '
+    + pad(d.getHours()) + ':'
+    + pad(d.getMinutes()) + ':'
+    + pad(d.getSeconds());
 }
 $(document).ready(function(){
   var folderTitle = toShortISODateString(new Date());
