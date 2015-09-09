@@ -7,11 +7,14 @@
     </style>
   </head>
   <body>
+    <h1 style="text-align:center;">Bookmark All</h1>
     <form>
-      <label>Folder Name</label>
-      <input id="folderName"><br/>
-      <label style="white-space: nowrap;"><input type="checkbox" id="windowsAsFolders">Create a folder for each window</label>
-      <button type="submit">Bookmark</button>
+      <label>Folder Name: <input id="folderName"></label><br>
+      <label style="white-space: nowrap;">Inside: <select id="parentFolder"></select></label><br>
+      <label style="white-space: nowrap;"><input type="checkbox" id="windowsAsFolders">Create a folder for each window</label><br>
+      <p style="text-align:center;">
+        <button type="submit">Bookmark</button>
+      </p>
     </form>
     <script src="jquery-1.10.2.min.js"></script>
     <script src="script.js"></script>

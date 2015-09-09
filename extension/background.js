@@ -1,10 +1,29 @@
-function bookmarkAll(folderTitle, windowsAsFolders) {
+var OTHER_BOOKMARKS_ID = '2';
+function getParentFolderOptions(cb) {
+  chrome.bookmarks.get(OTHER_BOOKMARKS_ID, function(folders) {
+    var otherBookmarksFolder = folders[0];
+    var results = [{id: otherBookmarksFolder.id, title: otherBookmarksFolder.title}];
+    chrome.bookmarks.getChildren(OTHER_BOOKMARKS_ID, function(children) {
+      for(var i = 0; i < children.length; i++) {
+        var child = children[i];
+        if(!child.url) {
+          results.push({id: child.id, title: otherBookmarksFolder.title + ' / ' + child.title});
+        }
+      }
+      cb(results);
+    });
+  });
+}
+
+
+function bookmarkAll(folderTitle, parentFolderId, windowsAsFolders) {
   console.log("Creating new bookmarks in " + folderTitle);
   // Create folder
   chrome.bookmarks.create(
       {
         title: folderTitle,
-        url: null
+        url: null,
+        parentId: parentFolderId
       },
     function(folder){
       if (folder == null) {
