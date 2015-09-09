@@ -4,13 +4,21 @@
       body {
         min-width:200px;
       }
+      label {
+        white-space: nowrap;
+      }
     </style>
   </head>
   <body>
+    <h1 style="text-align:center;">Bookmark All</h1>
     <form>
-      <label>Folder Name</label>
-      <input id="folderName">
-      <button type="submit">Bookmark</button>
+      Bookmark all open tabs ...<br>
+      <label>... to a new folder named <input id="folderName"></label> ...<br>
+      <label>... created inside <select id="parentFolder"></select>.</label><br>
+      <label><input type="checkbox" id="windowsAsFolders">Create a sub-folder ("01", "02", ...) for each window.</label><br>
+      <p style="text-align:center;">
+        <button type="submit">Bookmark</button>
+      </p>
     </form>
     <script src="jquery-1.10.2.min.js"></script>
     <script src="script.js"></script>
